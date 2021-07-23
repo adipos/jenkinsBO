@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  jenkins:
+    image: jenkinsci/blueocean
+    privileged: true
+    user: root
+    environment:
+      - VIRTUAL_HOST=jenkins.adisolutions.com.co
+      - LETSENCRYPT_HOST=jenkins.adisolutions.com.co
+      - LETSENCRYPT_EMAIL=andres.guerrero@adisolutions.com.co
+      - VIRTUAL_PORT=8080
+    container_name: adi-jenkins
+    volumes:
+      - ~/jenkins_data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+networks:
+  default:
+    external:
+      name: nginx-ssl_default
